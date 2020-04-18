@@ -8,15 +8,15 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-class I2Cpi : public I2C {
+class I2Clinux : public I2C {
   private:
     int i2c;
     std::string device;
     unsigned char address;
 
   public:
-    I2Cpi(std::string device, unsigned char address);
-    ~I2Cpi();
+    I2Clinux(std::string device, unsigned char address);
+    ~I2Clinux();
     // Returns true if initialization is successful
     bool init();
     bool send(const Config& config, const char* buffer, int size);

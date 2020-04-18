@@ -1,13 +1,13 @@
-#include "I2Cpi.h"
+#include "I2Clinux.h"
 
-I2Cpi::I2Cpi(std::string device, unsigned char address) {
+I2Clinux::I2Clinux(std::string device, unsigned char address) {
     this->device = device;
     this->address = address;
 }
 
-I2Cpi::~I2Cpi() { close(i2c); }
+I2Clinux::~I2Clinux() { close(i2c); }
 
-bool I2Cpi::init() {
+bool I2Clinux::init() {
     i2c = open(device.c_str(), O_RDWR);
     if (i2c < 0) {
         return false;
@@ -20,7 +20,7 @@ bool I2Cpi::init() {
     return false;
 }
 
-bool I2Cpi::send(const Config& config, const char* buffer, int size) {
+bool I2Clinux::send(const Config& config, const char* buffer, int size) {
     if (write(i2c, buffer, size) == size) {
         return true;
     }
@@ -28,7 +28,7 @@ bool I2Cpi::send(const Config& config, const char* buffer, int size) {
     return false;
 }
 
-bool I2Cpi::receive(const Config& config, char* buffer, int size) {
+bool I2Clinux::receive(const Config& config, char* buffer, int size) {
     if (read(i2c, buffer, size) == size) {
         return true;
     }
